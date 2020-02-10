@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Merriweather:100,200,300,300i,400,400i,700');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400');
+@import url('https://fonts.googleapis.com/css?family=Sriracha&display=swap');
+
 
 body {
   font-family: "Open Sans", serif;
@@ -28,25 +30,20 @@ body {
   background: url("image/background.jpg") center center no-repeat;
   background-size: cover;
   display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
+  font-family: 'Sriracha', cursive;
   color: #000;
+  border: 2px solid;
+  border-color: #4EE2EC;
 }
-
-.title-container__title {
-  font-size: 50px;
-  letter-spacing: 2px;
-  line-height: 1.3;
-  font-family: 'Roboto Slab', serif;
+.title-text {
+  font-size: 45px;
+  margin-top: 180px;
+  letter-spacing: 1.6px;
 }
-
-.title-container__subtitle {
-  font-style: italic;
-  font-weight: 100;
-  letter-spacing: 1px;
-  line-height: 1.5;
-  font-family: "Merriweather", serif;
+.subtitle-text {
+  font-size: 18px;
+  letter-spacing: 1.1px;
 }
 
 .form-container {
@@ -55,6 +52,12 @@ body {
   padding-top: 100px;
   padding-left: 50px;
 }
+
+.info-text {
+  font-family: 'Open Sans', serif;
+  font-size: 15px;
+}
+
 
 input[type="text"] {
   background-color: transparent;
@@ -68,18 +71,16 @@ input[type="text"] {
   margin-bottom: 28px;
   margin-right: 20px;
   font-size: 20px;
+  outline: none; /* this removes the default outline when typing into the input box */
 }
 
-input[type="text"] {
-    outline: none;
+
+input:-webkit-autofill { /* this determines the colour of the text and input box for autofilled content */
+    -webkit-box-shadow: 0 0 0 30px #F0FFFF inset;
+    -webkit-text-fill-color: #00000 !important;
 }
 
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 30px #2c3e50 inset;
-    -webkit-text-fill-color: #fff !important;
-}
-
-button {
+button { /* this is for the "Search" button */
   border: 0;
   padding: 8px 20px;
   margin-left: 40px;
@@ -93,36 +94,6 @@ button {
   font-weight: 100;
 }
 
-button:active {
+button:active { /* this removes the default outline when the button is pressed */
   outline: none;
-}
-
-.weather__info {
-  width: 60%;
-  font-size: 20px;
-  font-weight: 200;
-  letter-spacing: 2px;
-}
-
-.weather__key {
-  color: #f16051;
-  border-bottom: solid 2px rgba(255,255,255,0.06);
-  padding: 20px 0 20px 0;
-  font-weight: 400;
-}
-
-.weather__key:last-child {
-  border: 0;
-}
-
-.weather__value {
-  color: #fff;
-  font-weight: 200;
-}
-
-.weather__error {
-  color: #f16051;
-  font-size: 20px;
-  letter-spacing: 1px;
-  font-weight: 200;
 }
