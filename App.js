@@ -1,8 +1,7 @@
 import React from "react";
-
 import Titles from "./components/Titles";
 import Form from "./components/Form";
-import Weather from "./components/Weather.js";
+import Info from "./components/Info.js";
 
 class App extends React.Component {
   state = {
@@ -21,7 +20,7 @@ class App extends React.Component {
     route: undefined,
     error: undefined
   }
-  getWeather = async (e) => {
+  getInfo = async (e) => {
     e.preventDefault();
     const origin_city = e.target.elements.leaveCity.value;
     const origin_country = e.target.elements.leaveCountry.value;
@@ -84,8 +83,8 @@ class App extends React.Component {
                   <Titles />
                 </div>
                 <div className="col-xs-9 form-container">
-                  <Form getWeather={this.getWeather}/>
-                  <Weather
+                  <Form getInfo={this.getInfo}/>
+                  <Info
                     originTemp={this.state.originTemp}
                     originOtherTemp={this.state.originOtherTemp}
                     originCity={this.state.originCity}
@@ -110,6 +109,5 @@ class App extends React.Component {
       );
   }
 };
-
 
 export default App;
