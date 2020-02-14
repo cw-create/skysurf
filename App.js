@@ -30,13 +30,13 @@ class App extends React.Component {
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=30ff84987657bcf09dfc43233b0a4bd2&units=metric`);
     const origin_data = await origin_api.json();
     const data = await api_call.json();
-    const origin_lon = origin_data.coord.lon;
-    const origin_lat = origin_data.coord.lat;
-    const dest_lon = data.coord.lon;
-    const dest_lat = data.coord.lat;
-    const route_api = await fetch(`https://route.ls.hereapi.com/routing/7.2/calculateroute.json?apiKey=q6thnsyXcJJYEv2pRmCICDj-jqG5Ak6AXZcNFsjqxFo&waypoint0=geo!${origin_lat},${origin_lon}&waypoint1=geo!${dest_lat},${dest_lon}&mode=fastest;car;traffic:disabled`);
-    const route_data = await route_api.json();
     if (city && country) {
+      const origin_lon = origin_data.coord.lon;
+      const origin_lat = origin_data.coord.lat;
+      const dest_lon = data.coord.lon;
+      const dest_lat = data.coord.lat;
+      const route_api = await fetch(`https://route.ls.hereapi.com/routing/7.2/calculateroute.json?apiKey=q6thnsyXcJJYEv2pRmCICDj-jqG5Ak6AXZcNFsjqxFo&waypoint0=geo!${origin_lat},${origin_lon}&waypoint1=geo!${dest_lat},${dest_lon}&mode=fastest;car;traffic:disabled`);
+      const route_data = await route_api.json();
       this.setState({
         originTemp: origin_data.main.feels_like,
         originOtherTemp: origin_data.main.feels_like,
