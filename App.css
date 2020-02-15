@@ -55,9 +55,21 @@ body {
 
 .info-text {
   font-family: 'Open Sans', serif;
-  font-size: 15px;
+  font-size: 16px;
 }
 
+.originText {
+  margin-top: 21px;
+  line-height: 30px;
+}
+.routeInfo-text {
+  margin-top: 28%;
+  margin-left: 1.9%;
+}
+
+.destinationText {
+  line-height: 30px;
+}
 
 input[type="text"] {
   background-color: transparent;
