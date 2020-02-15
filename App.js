@@ -30,29 +30,67 @@ class App extends React.Component {
     const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=30ff84987657bcf09dfc43233b0a4bd2&units=metric`);
     const origin_data = await origin_api.json();
     const data = await api_call.json();
-    if (city && country) {
+    if (city && country && origin_city && origin_country) {
+      if (data.cod == "404" || data.message == "city not found") {
+        this.setState({
+          originTemp: undefined,
+          originOtherTemp: undefined,
+          originCity: undefined,
+          originCountry: undefined,
+          originHumidity: undefined,
+          originDescription: undefined,
+          temperature: undefined,
+          otherTemp: undefined,
+          city: undefined,
+          country: undefined,
+          humidity: undefined,
+          description: undefined,
+          route: undefined,
+          error:"Not a valid country."
+        });
+      }
       const origin_lon = origin_data.coord.lon;
       const origin_lat = origin_data.coord.lat;
       const dest_lon = data.coord.lon;
       const dest_lat = data.coord.lat;
       const route_api = await fetch(`https://route.ls.hereapi.com/routing/7.2/calculateroute.json?apiKey=q6thnsyXcJJYEv2pRmCICDj-jqG5Ak6AXZcNFsjqxFo&waypoint0=geo!${origin_lat},${origin_lon}&waypoint1=geo!${dest_lat},${dest_lon}&mode=fastest;car;traffic:disabled`);
       const route_data = await route_api.json();
-      this.setState({
-        originTemp: origin_data.main.feels_like,
-        originOtherTemp: origin_data.main.feels_like,
-        originCity: origin_data.name,
-        originCountry: origin_data.sys.country,
-        originHumidity: origin_data.main.humidity,
-        originDescription: origin_data.weather[0]. description,
-        temperature: data.main.temp,
-        otherTemp: data.main.feels_like,
-        city: data.name,
-        country: data.sys.country,
-        humidity: data.main.humidity,
-        description: data.weather[0].description,
-        route: route_data.response.route[0].summary.text,
-        error:""
-      });
+      if (route_data._type == "ns2:RoutingServiceErrorType") { // if the API can't find a valid route to the destination
+        this.setState({
+          originTemp: undefined,
+          originOtherTemp: undefined,
+          originCity: undefined,
+          originCountry: undefined,
+          originHumidity: undefined,
+          originDescription: undefined,
+          temperature: undefined,
+          otherTemp: undefined,
+          city: undefined,
+          country: undefined,
+          humidity: undefined,
+          description: undefined,
+          route: undefined,
+          error:"Cannot find a valid route."
+        });
+      }
+        if (!route_data._type) {
+        this.setState({
+          originTemp: origin_data.main.feels_like,
+          originOtherTemp: origin_data.main.feels_like,
+          originCity: origin_data.name,
+          originCountry: origin_data.sys.country,
+          originHumidity: origin_data.main.humidity,
+          originDescription: origin_data.weather[0]. description,
+          temperature: data.main.temp,
+          otherTemp: data.main.feels_like,
+          city: data.name,
+          country: data.sys.country,
+          humidity: data.main.humidity,
+          description: data.weather[0].description,
+          route: route_data.response.route[0].summary.text,
+          error:""
+        });
+      }
     } else {
       this.setState({
         originTemp: undefined,
